@@ -1,17 +1,20 @@
-module prgmcount(input clk,
-                input rst, pc_next
-                output pc);
-always_ff @( posedge clk ) begin
-    if(rst)
-    pc<={32{1'b0}};
+module pc (
+
+    input  logic        clk,
+    input  logic        rst,
+    input  logic [31:0] next_pc,
+
+    output logic [31:0] pc
+
+);
+
+always_ff @(posedge clk) begin
+
+    if (rst)
+        pc <= 32'h00000000;
     else
-    pc<=pc_next;    
+        pc <= next_pc;
+
 end
-endmodule
 
-
-module pc_adder(input pc;
-                output pc_next);
-
-assign pc_next = pc+32'd4;
 endmodule
